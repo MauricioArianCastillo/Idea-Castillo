@@ -2,13 +2,15 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 //import App from './App';
-import NavBar from './components/NavBar';
+import NavBar from './Components/NavBar/NavBar';
 import reportWebVitals from './reportWebVitals';
+import ItemListContainer from './Components/ItemListContainer/ItemListContainer';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <NavBar />
+    <ItemListContainer />
   </React.StrictMode>
   /*<React.StrictMode>
     <App />

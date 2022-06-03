@@ -1,3 +1,4 @@
+import CartWidget from "../CartWidget/CartWidget";
 
 
 function Navbar() {
@@ -20,6 +21,7 @@ function Navbar() {
                 <li className="nav-item">
                 <a className="nav-link" href="#">Precios</a>
                 </li>
+                <CartWidget />
             </ul>
             </div>
         </div>

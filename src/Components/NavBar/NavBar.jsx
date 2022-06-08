@@ -1,7 +1,7 @@
 import CartWidget from "../CartWidget/CartWidget";
 
 
-function Navbar() {
+function NavBar() {
     return (
         <>
         <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -30,4 +30,4 @@ function Navbar() {
     );
   }
   
-  export default Navbar;
+  export default NavBar;

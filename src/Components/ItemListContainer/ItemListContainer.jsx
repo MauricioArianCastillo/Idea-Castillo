@@ -1,11 +1,11 @@
+import ItemCount from "../ItemCount/ItemCounts";
 
 const ItemListContainer  = (props) => {
 
-    let saludo = 'Bienvenido!';
     return(
         <>
         <div className="container-fluid">
-            <h1>{saludo}</h1>
+            <ItemCount stock="10" init="1" onAdd={(count) => console.log(count)} />
         </div>
       </>
     )

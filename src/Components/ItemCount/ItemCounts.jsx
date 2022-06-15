@@ -17,7 +17,7 @@ function ItemCount ({stock, initial,onAdd}){
         }
     }
     return(
-    <>
+    <>  
         <div className="card">
             <div className="card-body">
                 <h5 className="card-title">(stock {stock})</h5>

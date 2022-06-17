@@ -4,18 +4,18 @@ import getFetchItem from "../../Helpers/getFetch/getFetchItem";
 import ItemCount from "../ItemCount/ItemCounts";
 import ItemDetail from "../ItemDetail/ItemDetail";
 import ItemList from "../ItemList/ItemList";
-
+import {useParams}  from "react-router-dom"
 
 const ItemDetailContainer = (props) => {
     
-    const Items = [{id: "1", title: "Martillo",
+    const Items = [{categoryId: "martillos",id: "1", title: "Martillo",
     description: `- Cabeza forjada en acero especial y templada garantizando gran resistencia al producto.
     - Acabado pulido y cabeza barnizada, proporcionando protección contra la oxidación.
     - Mango de madera fijado con epoxi.
     - Perfecto balance entre la cabeza y el mango para aumentar el confort y seguridad del usuario durante el uso.
     - Los martillos son sometidos a un proceso de temple localizado para tener dureza adecuada en la base de impacto y uñas para soportar el uso continuo por largos períodos.`,
      price: "5000", pictureUrl: "https://d3f64ghtnjizps.cloudfront.net/wp-content/uploads/sites/103/2020/07/03094818/ikbp%C3%B1.jpg"},
-    {id: "2", title: "Pala",
+    {categoryId: "palas", id: "2", title: "Pala",
     description: `- Cabeza forjada en acero especial y templada garantizando gran resistencia al producto.
     - Acabado pulido y cabeza barnizada, proporcionando protección contra la oxidación.
     - Mango de madera fijado con epoxi.
@@ -25,9 +25,12 @@ const ItemDetailContainer = (props) => {
 
     const [i, setItem] = useState()
     const [loading, setLoading] = useState(true)
+    const  {id} = useParams()
+    console.log({id})
+
 
     useEffect(()=>{
-        getFetchItem (Items,0)
+        getFetchItem (Items,id - 1)
         .then((resp)=>{
             setItem(resp)
         })

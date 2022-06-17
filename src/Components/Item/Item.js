@@ -1,4 +1,5 @@
 import ItemCount from "../ItemCount/ItemCounts";
+import { NavLink } from 'react-router-dom'
 
 function Item ({id,title,price,pictureUrl}){
 
@@ -18,7 +19,11 @@ function Item ({id,title,price,pictureUrl}){
                         </div>
                     </div>
                     <div className="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                        <div className="text-center"><a className="btn btn-outline-dark mt-auto" href="#">Detalles</a></div>
+                        <div className="text-center">
+                            <NavLink to={`/item/${id}`}>
+                                <a className="btn btn-outline-dark mt-auto" href="#">Detalles</a>
+                            </NavLink>
+                        </div>
                     </div>
                     {<ItemCount stock="10" initial="0" onAdd={onAdd} />}
                 </div>

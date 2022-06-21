@@ -4,32 +4,32 @@ import ItemCount from "../ItemCount/ItemCounts";
 import ItemList from "../ItemList/ItemList";
 import {useParams}  from "react-router-dom"; 
 
-const ItemListContainer  = (props) => {
+const ItemListContainer  = () => {
     
     const [productos, setProductos] = useState([])
     const [loading, setLoading] = useState(true)
-    const {categoryId1 } = useParams()
+    const {categoryId } = useParams()
 
 
     useEffect(()=>{
-        if (categoryId1){
-            getFetch ()
+        if (categoryId){
+            getFetch ("lista")
             .then((resp)=>{
-                setProductos(resp.filter(producto => producto.categoryId === categoryId1))
+                setProductos(resp.filter(producto => producto.categoryId === categoryId))
+                setLoading(false)
             })
             .catch(err => console.log(err))
-            .finally(()=> setLoading(false));
         }
         else{
-            getFetch ()
+            getFetch ("lista")
         .then((resp)=>{
             setProductos(resp)
+            setLoading(false)
         })
         .catch(err => console.log(err))
-        .finally(()=> setLoading(false));
         }
         
-    })
+    }, [categoryId])
 
 
     return(

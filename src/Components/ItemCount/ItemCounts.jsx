@@ -1,4 +1,5 @@
 import React, {useState} from "react";
+import { Link } from 'react-router-dom'
 
 function ItemCount ({stock, initial,onAdd}){
 
@@ -7,15 +8,15 @@ function ItemCount ({stock, initial,onAdd}){
     function agregar(){
         if (count!=stock){
         setCount(count +1);
-        onAdd(count +1);
         }
     }
     function restar(){
         if (count!=initial){
         setCount(count -1);
-        onAdd(count -1);
         }
     }
+
+    
     return(
     <>  
         <div className="card">
@@ -25,6 +26,9 @@ function ItemCount ({stock, initial,onAdd}){
                 <div className="btn-group" role="group" aria-label="Basic example">
                     <button type="button" className="btn btn-primary" onClick={restar}>-</button>
                     <button type="button" className="btn btn-primary" onClick={agregar}>+</button>
+                </div>
+                <div className="btn">
+                    <button type="button" className="btn btn-primary" onClick={onAdd(count)}>Agregar al carrito</button>
                 </div>
             </div>
         </div>    

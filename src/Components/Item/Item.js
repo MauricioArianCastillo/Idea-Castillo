@@ -1,19 +1,21 @@
 import ItemCount from "../ItemCount/ItemCounts";
 import { Link, NavLink } from 'react-router-dom'
 import Cart from "../Cart/Cart";
+import { useState } from "react";
 
 function Item ({id,title,price,pictureUrl}){
 
-    let bool = true, counter = 0;
-    function onAdd(count){
-        
-        bool = false;
-        counter = count;
+    const [bool, setBool] = useState(true)
+    let counter = 0;
+    const onAdd = (count) =>{
+
+        counter = count
+        if(count!=0) {setBool(false)}
+        console.log(counter)
     }
 
     return(
-        <> {
-            (bool) ?
+        <> 
             <div className="col mb-5">
                 <div className="card h-100">
                     <img className="card-img-top" src={pictureUrl} alt="..." />
@@ -30,15 +32,16 @@ function Item ({id,title,price,pictureUrl}){
                             </NavLink>
                         </div>
                     </div>
-                    <ItemCount stock="10" initial="0" onAdd={onAdd} />
+                    { (bool) ?
+                        <ItemCount stock="10" initial="0" Add={onAdd} />
+                        : 
+                        <Link to={'/cart'}>
+                            <button type="button" className="btn btn-primary" onClick={<Cart contador={counter}></Cart>}>Ir al carrito</button>
+                            
+                        </Link>
+                    }
                 </div>
             </div>
-            :
-            <Link to={'/cart'}>
-                <button type="button" className="btn btn-primary">Agregar al carrito</button>
-                <Cart contador={counter}></Cart>
-              </Link>
-        }
             
         </>
     )

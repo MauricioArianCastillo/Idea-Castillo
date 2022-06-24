@@ -1,8 +1,17 @@
+import { useCartContext } from "../Contexts/CartContext";
+
 
 function Cart({contador}){
+
+    const { cart } = useCartContext()
     return(
         <>
-            <h1>La cantidad seleccionada es: {Number(contador)} </h1>
+            <div>
+                <ul>
+                    
+                </ul>
+            </div>
+            <h1>La cantidad seleccionada es: {contador} </h1>
         </>
     )
 }

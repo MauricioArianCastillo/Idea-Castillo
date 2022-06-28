@@ -14,9 +14,11 @@ function ItemDetail ({id,title,price,description,pictureUrl}){
 
         if(count!=0) {setBool(false)}
         setContador(count)
-        const item = cart.find((item) => item.id===id)
-        console.log(item)
-        if(item.id === id) item.cantidad = item.cantidad + count  
+        if(cart.find((item) => item.id===id)){
+            const item = cart.find((item) => item.id===id) 
+            item.cantidad = item.cantidad + count
+        
+        }  
         else addToCart({...producto,cantidad: count})
         
     }
@@ -41,7 +43,7 @@ function ItemDetail ({id,title,price,description,pictureUrl}){
                             { (bool) ?
                             <ItemCount stock={10} initial={0} Add={Add} />
                             : 
-                            <NavLink to={`/cart/${contador}`}>
+                            <NavLink to={`/cart`}>
                                 <button type="button" className="btn btn-primary" >Ir al carrito</button>
                                 
                             </NavLink>

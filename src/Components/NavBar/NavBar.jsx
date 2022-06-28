@@ -29,9 +29,11 @@ function NavBar() {
                   </Link>
                 </li>
               </ul>
-              <ul className="d-flex">
-                    <CartWidget /> 
-              </ul>
+              <Link to={'/cart'}>
+                <ul className="d-flex">
+                      <CartWidget /> 
+                </ul>
+              </Link>
             </div>
           </div>
         </nav>

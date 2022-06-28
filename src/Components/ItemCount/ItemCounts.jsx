@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 
 function ItemCount ({stock, initial,Add}){
 
-    const [count,setCount] = useState(Number(initial));
+    const [count,setCount] = useState(initial);
 
     function agregar(){
         if (count!=stock){
@@ -15,7 +15,7 @@ function ItemCount ({stock, initial,Add}){
         setCount(count -1);
         }
     }
-
+    
     
     return(
     <>  
@@ -28,7 +28,7 @@ function ItemCount ({stock, initial,Add}){
                     <button type="button" className="btn btn-primary" onClick={agregar}>+</button>
                 </div>
                 <div className="btn">
-                    <button type="button" className="btn btn-primary" onClick={Add(count)}>Agregar al carrito</button>
+                    <button type="button" className="btn btn-primary" onClick={() => Add(count)}>Agregar al carrito</button>
                 </div>
             </div>
         </div>    

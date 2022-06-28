@@ -1,18 +1,28 @@
 import ItemCount from "../ItemCount/ItemCounts";
 import { Link, NavLink } from 'react-router-dom'
 import Cart from "../Cart/Cart";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { CartContext } from "../Contexts/CartContext";
 
-function Item ({id,title,price,pictureUrl}){
+function Item ({id,title,price,description,pictureUrl}){
 
+    const producto = {id:id,title:title,price:price,description:description,pictureUrl:pictureUrl}
+    const { cart,addToCart} = useContext(CartContext)
     const [bool, setBool] = useState(true)
-    let counter = 0;
+    const [contador, setContador] = useState(0)
     const onAdd = (count) =>{
 
-        counter = count
         if(count!=0) {setBool(false)}
-        console.log(counter)
+        setContador(count)
+        if(cart.find((item) => item.id===id)){
+            const item = cart.find((item) => item.id===id) 
+            item.cantidad = item.cantidad + count
+        
+        }  
+        else addToCart({...producto,cantidad: count})
+        
     }
+    console.log(cart)
 
     return(
         <> 
@@ -33,12 +43,12 @@ function Item ({id,title,price,pictureUrl}){
                         </div>
                     </div>
                     { (bool) ?
-                        <ItemCount stock="10" initial="0" Add={onAdd} />
+                        <ItemCount stock={10} initial={0} Add={onAdd} />
                         : 
-                        <Link to={'/cart'}>
-                            <button type="button" className="btn btn-primary" onClick={<Cart contador={counter}></Cart>}>Ir al carrito</button>
+                        <NavLink to={`/cart`}>
+                            <button type="button" className="btn btn-primary">Ir al carrito</button>
                             
-                        </Link>
+                        </NavLink>
                     }
                 </div>
             </div>

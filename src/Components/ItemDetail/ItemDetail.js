@@ -1,22 +1,26 @@
 import { useContext, useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import Cart from "../Cart/Cart";
 import { CartContext } from "../Contexts/CartContext";
 import ItemCount from "../ItemCount/ItemCounts";
 
 function ItemDetail ({id,title,price,description,pictureUrl}){
     
-    const { addToCart} = useContext(CartContext)
+    const producto = {id:id,title:title,price:price,description:description,pictureUrl:pictureUrl}
+    const { cart,addToCart} = useContext(CartContext)
     const [bool, setBool] = useState(true)
-    let counter=0; 
+    const [contador, setContador] = useState(0)
     const Add = (count) =>{
 
-        counter = count
         if(count!=0) {setBool(false)}
-        console.log(counter)
-       // addToCart({...{id,title,price,description,pictureUrl},cantidad: count})
+        setContador(count)
+        const item = cart.find((item) => item.id===id)
+        console.log(item)
+        if(item.id === id) item.cantidad = item.cantidad + count  
+        else addToCart({...producto,cantidad: count})
+        
     }
-
+    console.log(cart)
     
     return(
         <>
@@ -35,12 +39,12 @@ function ItemDetail ({id,title,price,description,pictureUrl}){
                                 <div className="text-center"><a className="btn btn-outline-dark mt-auto" href="#">Detalles</a></div>
                             </div>
                             { (bool) ?
-                            <ItemCount stock="10" initial="0" Add={Add} />
+                            <ItemCount stock={10} initial={0} Add={Add} />
                             : 
-                            <Link to={'/cart'}>
-                                <button type="button" className="btn btn-primary" onClick={<Cart contador={counter}></Cart>}>Ir al carrito</button>
+                            <NavLink to={`/cart/${contador}`}>
+                                <button type="button" className="btn btn-primary" >Ir al carrito</button>
                                 
-                            </Link>
+                            </NavLink>
                              }
                         </div>
                     </div>

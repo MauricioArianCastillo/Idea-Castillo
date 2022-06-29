@@ -19,7 +19,8 @@ export const CartContextProvider = ({children}) => {
             value={{
                 cart,
                 addToCart,
-                vaciarCarrito  
+                vaciarCarrito,
+                setCart
             }}
             >
             {children}    

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useCartContext } from "../Contexts/CartContext";
 import ItemCartCount from "../ItemCartCount/ItemCartCount";
@@ -6,17 +6,25 @@ import ItemCartCount from "../ItemCartCount/ItemCartCount";
 
 function Cart(){
 
-    const { cart, vaciarCarrito } = useCartContext()
+    const { cart, vaciarCarrito, setCart } = useCartContext()
     let Total = cart.map(item =>  item.price*item.cantidad).reduce((prev,curr) => prev + curr,0)
     const [total,setTotal] = useState(Total);
+
     function funcion(count,id){
 
         const item = cart.find((item) => item.id===id) 
         item.cantidad = count
         setTotal(cart.map(item =>  item.price*item.cantidad).reduce((prev,curr) => prev + curr,0))
+        
+        if (count===0) setCart(cart.filter(item => item.id !== id))
+        console.log(cart)
+
     }
-    
-    
+    function vaciarCarritoTotal(cart){
+        vaciarCarrito(cart)
+        setTotal(0)
+    }
+
     
     return(
         <>
@@ -35,7 +43,7 @@ function Cart(){
                 <h3>TOTAL: ${total}</h3>
             </div>
             <div className="btn">
-                <button type="button" className="btn btn-primary" onClick={() => vaciarCarrito(cart)}>Vaciar Carrito</button>
+                <button type="button" className="btn btn-primary" onClick={() => vaciarCarritoTotal(cart)}>Vaciar Carrito</button>
             </div>
         </>
     )

@@ -20,7 +20,7 @@ export const CartContextProvider = ({children}) => {
                 cart,
                 addToCart,
                 vaciarCarrito,
-                setCart
+                setCart,
             }}
             >
             {children}    

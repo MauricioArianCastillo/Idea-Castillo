@@ -8,13 +8,13 @@ function ItemCartCount ({stock,initial,item,funcion,id}){
     function agregar(){
         if (count!=stock){
         setCount(count +1);
-        funcion(count,id)
+        funcion(count+1,id)
         }
     }
     function restar(){
         if (count!=0){
         setCount(count -1);
-        funcion(count,id)
+        funcion(count-1,id)
         }
         else{funcion(count,id)}
     }

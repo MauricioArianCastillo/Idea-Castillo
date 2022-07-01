@@ -3,6 +3,9 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
 import App from './App';
+import { getFirestoreApp } from './Components/Firebase/Config';
+
+getFirestoreApp()
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

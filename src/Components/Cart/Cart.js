@@ -6,6 +6,7 @@ import ItemCartCount from "../ItemCartCount/ItemCartCount";
 
 function Cart(){
 
+    console.log('prueba')
     const { cart, vaciarCarrito, setCart } = useCartContext()
     let Total = cart.map(item =>  item.price*item.cantidad).reduce((prev,curr) => prev + curr,0)
     const [total,setTotal] = useState(Total);

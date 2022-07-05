@@ -4,24 +4,26 @@ import ItemCount from "../ItemCount/ItemCounts";
 import ItemDetail from "../ItemDetail/ItemDetail";
 import ItemList from "../ItemList/ItemList";
 import {useParams}  from "react-router-dom"
-import { doc, getDoc, getFirestore } from "firebase/firestore";
+import { collection, doc, getDoc, getDocs, getFirestore, query, where } from "firebase/firestore";
 
 const ItemDetailContainer = (props) => {
     
     const [bool,setBool] = useState(true)
-    const [i, setItem] = useState()
+    const [i, setItem] = useState([])
     const [loading, setLoading] = useState(true)
     const  {id} = useParams()
 
 
     useEffect(() => {
         const db = getFirestore()
-        const queryItem = doc(db,'products')
-        getDoc(queryItem)
-        .then(resp => setItem({id: resp.id,...resp.data()}))
-        console.log(i)
+        const queryCollection = collection(db,'products')
+        const queryCollectionFilter = query( queryCollection, where('id','==', Number(id)))
+        getDocs(queryCollectionFilter)
+        .then(data => setItem(data.docs.map(item => ({id: item.id, ...item.data()}))))
+       
         setLoading(false)
-    },[bool])
+    },[])
+    console.log(i)
 
     /*useEffect(()=>{
         getFetch (id - 1)
@@ -39,7 +41,7 @@ const ItemDetailContainer = (props) => {
             { loading ?
                 <h1>Cargando..</h1>
                 :
-                <ItemDetail id={i.id} title={i.title} price={i.price} description={i.description} pictureUrl={i.pictureUrl}/>
+                i.map(item => <ItemDetail id={item.id} title={item.title} price={item.price} description={item.description} pictureUrl={item.pictureUrl} />)
             }
         </div>
       </>

@@ -3,7 +3,7 @@ import getFetch from "../../Helpers/getFetch/getFetch";
 import ItemCount from "../ItemCount/ItemCounts";
 import ItemList from "../ItemList/ItemList";
 import {useParams}  from "react-router-dom"; 
-import {doc, getDoc, getFirestore} from 'firebase/firestore'
+import {collection, doc, getDoc, getDocs, getFirestore, query, where} from 'firebase/firestore'
 
 const ItemListContainer  = () => {
     
@@ -14,12 +14,18 @@ const ItemListContainer  = () => {
 
     useEffect(() => {
         const db = getFirestore()
-        const queryItem = doc(db,'products','pdOSD2uMBSCfSxfPwJVc')
-        getDoc(queryItem)
-        .then(resp => setProductos({id: resp.id,...resp.data()}))
+        const queryCollection = collection(db,'products')
+        const queryCollectionFilter = query( queryCollection, where('categoryId','==', `${categoryId}`))
+        if (categoryId) { getDocs(queryCollectionFilter)
+        .then(data => setProductos(data.docs.map(item => ({id: item.id, ...item.data()}))))}
+        else {
+            getDocs(queryCollection)
+            .then(data => setProductos(data.docs.map(item => ({id: item.id, ...item.data()}))))
+        }
+       
         setLoading(false)
-        console.log(productos)
-    },[bool])
+    },[categoryId])
+    console.log(productos)
 
    /* useEffect(()=>{
         if (categoryId){

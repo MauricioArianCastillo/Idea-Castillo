@@ -1,3 +1,4 @@
+import { addDoc, collection, getFirestore } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useCartContext } from "../Contexts/CartContext";
@@ -25,6 +26,26 @@ function Cart(){
         vaciarCarrito(cart)
         setTotal(0)
     }
+    function generarOrden(e) {
+        e.preventDefault()
+        let orden = {}
+
+        orden.buyer = {name:'mauricio', email: 'm@gmail.com', phone: '123456789'}
+        orden.total = total
+
+        orden.items = cart.map(cartItem => {
+            const id = cartItem.id
+            const nombre = cartItem.title
+            const precio = cartItem.price * cartItem.cantidad
+            const cantidad = cartItem.cantidad
+
+            return {id,nombre,precio,cantidad}
+        })
+        const db = getFirestore()
+        const orderCollection = collection(db, 'orders')
+        addDoc(orderCollection, orden)
+        .then(resp => alert('Compra realizada! Id: ' + resp.id))
+    }
 
     
     return(
@@ -45,6 +66,8 @@ function Cart(){
             </div>
             <div className="btn">
                 <button type="button" className="btn btn-primary" onClick={() => vaciarCarritoTotal(cart)}>Vaciar Carrito</button>
+                <br></br>
+                <button type="button" className="btn btn-primary" onClick={generarOrden}>Comprar</button>
             </div>
         </>
     )

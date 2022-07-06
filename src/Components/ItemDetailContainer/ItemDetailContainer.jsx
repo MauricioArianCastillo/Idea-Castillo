@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import getFetch from "../../Helpers/getFetch/getFetch";
 import ItemCount from "../ItemCount/ItemCounts";
 import ItemDetail from "../ItemDetail/ItemDetail";
 import ItemList from "../ItemList/ItemList";
@@ -24,15 +23,6 @@ const ItemDetailContainer = (props) => {
         setLoading(false)
     },[])
     console.log(i)
-
-    /*useEffect(()=>{
-        getFetch (id - 1)
-        .then((resp)=>{
-            setItem(resp)
-        })
-        .catch(err => console.log(err))
-        .finally(()=> setLoading(false));
-    }, [])*/
 
 
     return(

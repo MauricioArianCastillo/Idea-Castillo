@@ -7,10 +7,12 @@ import ItemCartCount from "../ItemCartCount/ItemCartCount";
 
 function Cart(){
 
-    console.log('prueba')
     const { cart, vaciarCarrito, setCart } = useCartContext()
     let Total = cart.map(item =>  item.price*item.cantidad).reduce((prev,curr) => prev + curr,0)
     const [total,setTotal] = useState(Total);
+    const [name,setName] = useState('');
+    const [email,setEmail] = useState('');
+    const [tel,setTel] = useState('');
 
     function funcion(count,id){
 
@@ -30,7 +32,8 @@ function Cart(){
         e.preventDefault()
         let orden = {}
 
-        orden.buyer = {name:'mauricio', email: 'm@gmail.com', phone: '123456789'}
+       
+        orden.buyer = {name, email, tel}
         orden.total = total
 
         orden.items = cart.map(cartItem => {
@@ -67,7 +70,28 @@ function Cart(){
             <div className="btn">
                 <button type="button" className="btn btn-primary" onClick={() => vaciarCarritoTotal(cart)}>Vaciar Carrito</button>
                 <br></br>
-                <button type="button" className="btn btn-primary" onClick={generarOrden}>Comprar</button>
+                <form action="">
+                <div className="container-xxl">
+                    <div className="row">
+                    <div className="col">Nombre
+                        <input type="text" className="form-control" placeholder="First name" aria-label="First name"  value={name} onChange={(e) => setName(e.target.value)}/>
+                    </div>
+                    </div>
+                    <div className="mb-3">
+                    <label for="exampleFormControlInput1" className="form-label" >Email</label>
+                    <input type="email" className="form-control" id="exampleFormControlInput1" placeholder="" value={email} onChange={(e) => setEmail(e.target.value)}/>
+                    </div>
+                    <div className="mb-3">
+                    <label for="formGroupExampleInput" className="form-label"  >Telefono</label>
+                    <input type="tel" className="form-control" id="formGroupExampleInput" placeholder="" value={tel} onChange={(e) => setTel(e.target.value)}/>
+                    </div>
+                    <div className="col-12">
+                   
+                    <button type="button" className="btn btn-primary" onClick={generarOrden}>Comprar</button>
+                    </div>
+                </div>
+                </form>
+                
             </div>
         </>
     )

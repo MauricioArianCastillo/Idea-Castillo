@@ -24,7 +24,6 @@ const ItemListContainer  = () => {
        
         setLoading(false)
     },[categoryId])
-    console.log(productos)
 
 
     return(

@@ -13,6 +13,8 @@ function Cart(){
     const [name,setName] = useState('');
     const [email,setEmail] = useState('');
     const [tel,setTel] = useState('');
+    const [bool, setBool] = useState(false)
+    const [id,setId] = useState()
 
     function funcion(count,id){
 
@@ -31,8 +33,10 @@ function Cart(){
     function generarOrden(e) {
         e.preventDefault()
         let orden = {}
-
+        const tiempoTranscurrido = Date.now();
+        const hoy = new Date(tiempoTranscurrido);
        
+        orden.date = hoy.toUTCString()
         orden.buyer = {name, email, tel}
         orden.total = total
 
@@ -47,7 +51,9 @@ function Cart(){
         const db = getFirestore()
         const orderCollection = collection(db, 'orders')
         addDoc(orderCollection, orden)
-        .then(resp => alert('Compra realizada! Id: ' + resp.id))
+        .then(resp => setId(resp.id))
+        setBool(true)
+
     }
 
     
@@ -91,7 +97,14 @@ function Cart(){
                     </div>
                 </div>
                 </form>
-                
+            </div>
+            <div>
+            <br></br>
+                    { bool ?
+                        <h1>Compra realizada con exito! Tu id de compra es: {id}</h1>
+                        :
+                        <br></br>
+                    }
             </div>
         </>
     )

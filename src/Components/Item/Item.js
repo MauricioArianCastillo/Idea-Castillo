@@ -22,7 +22,6 @@ function Item ({id,title,price,description,pictureUrl}){
         else addToCart({...producto,cantidad: count})
         
     }
-    console.log(cart)
 
     return(
         <> 

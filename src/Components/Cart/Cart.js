@@ -11,10 +11,12 @@ function Cart(){
     let Total = cart.map(item =>  item.price*item.cantidad).reduce((prev,curr) => prev + curr,0)
     const [total,setTotal] = useState(Total);
     const [name,setName] = useState('');
+    const [ apellido,setApellido] = useState('')
     const [email,setEmail] = useState('');
     const [tel,setTel] = useState('');
-    const [bool, setBool] = useState(false)
+    const [bool, setBool] = useState()
     const [id,setId] = useState()
+    let error= 'error'
 
     function funcion(count,id){
 
@@ -32,12 +34,14 @@ function Cart(){
     }
     function generarOrden(e) {
         e.preventDefault()
+        if(name && email && tel && apellido){
+
         let orden = {}
         const tiempoTranscurrido = Date.now();
         const hoy = new Date(tiempoTranscurrido);
        
         orden.date = hoy.toUTCString()
-        orden.buyer = {name, email, tel}
+        orden.buyer = {name, email, tel, apellido}
         orden.total = total
 
         orden.items = cart.map(cartItem => {
@@ -54,6 +58,8 @@ function Cart(){
         .then(resp => setId(resp.id))
         setBool(true)
 
+    }
+    else{ setBool(error)}
     }
 
     
@@ -76,6 +82,8 @@ function Cart(){
             <div className="btn">
                 <button type="button" className="btn btn-primary" onClick={() => vaciarCarritoTotal(cart)}>Vaciar Carrito</button>
                 <br></br>
+                <br></br>
+                <br></br>
                 <form action="">
                 <div className="container-xxl">
                     <div className="row">
@@ -83,12 +91,15 @@ function Cart(){
                         <input type="text" className="form-control" placeholder="First name" aria-label="First name"  value={name} onChange={(e) => setName(e.target.value)}/>
                     </div>
                     </div>
+                    <div className="col">Apellido
+                        <input type="text" className="form-control" placeholder="Last name" aria-label="First name"  value={apellido} onChange={(e) => setApellido(e.target.value)}/>
+                    </div>
                     <div className="mb-3">
-                    <label for="exampleFormControlInput1" className="form-label" >Email</label>
+                    <label htmlFor="exampleFormControlInput1" className="form-label" >Email</label>
                     <input type="email" className="form-control" id="exampleFormControlInput1" placeholder="" value={email} onChange={(e) => setEmail(e.target.value)}/>
                     </div>
                     <div className="mb-3">
-                    <label for="formGroupExampleInput" className="form-label"  >Telefono</label>
+                    <label htmlFor="formGroupExampleInput" className="form-label"  >Telefono</label>
                     <input type="tel" className="form-control" id="formGroupExampleInput" placeholder="" value={tel} onChange={(e) => setTel(e.target.value)}/>
                     </div>
                     <div className="col-12">
@@ -100,10 +111,19 @@ function Cart(){
             </div>
             <div>
             <br></br>
-                    { bool ?
-                        <h1>Compra realizada con exito! Tu id de compra es: {id}</h1>
-                        :
-                        <br></br>
+                    {(() => {
+                         if (bool===true){ 
+                         return (<h1>Compra realizada con exito! Tu id de compra es: {id}</h1>)}
+                         else if (bool===error){return (
+                         <h1>Error! Ingresar nuevamente los datos!</h1>)
+                         }
+                         else{return(
+                            <br></br>) 
+                        } 
+                        
+                    }
+                    )()
+                                              
                     }
             </div>
         </>

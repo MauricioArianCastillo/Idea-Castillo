@@ -24,7 +24,7 @@ function ItemCartCount ({stock,initial,item,funcion,id}){
     <>  
                 <div className="btn-group" role="group" aria-label="Basic example">
                     <button type="button" className="btn btn-primary" onClick={restar}>-</button>
-                    <h2><span class="badge bg-secondary">{count}</span></h2>
+                    <h2><span className="badge bg-secondary">{count}</span></h2>
                     <button type="button" className="btn btn-primary" onClick={agregar}>+</button>
                 </div>   
         

@@ -6,30 +6,30 @@ function NavBar() {
         <>
         <nav className="navbar navbar-expand-lg bg-dark">
           <div className="container-fluid">
-            <Link to={'/'}>
-              <a className="navbar-brand" href="#">Mi Tienda</a>
+            <Link id="RouterNavLink"  to={'/'}>
+              <div className="navbar-brand" >A y R Construcciones</div>
             </Link>
             <div className="collapse navbar-collapse" id="navbarSupportedContent">
-              <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+            <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                 <li className="nav-item">
-                  <Link to={'/'}>
-                    <a className="nav-link active" aria-current="page" href="#">Home</a>
+                  <Link id="RouterNavLink"  to={'/'}>
+                    <div className="nav-link active" aria-current="page" href="#">Home</div>
                   </Link>
                 </li>
                 <li className="nav-item dropdown">
-                  <a className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Categorias</a>
+                  <div className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Categorias</div>
                   <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <li><Link to={'/categorias/martillos'}><a className="dropdown-item" href="#">Martillos</a></Link></li>
-                    <li><Link to={'/categorias/palas'}><a className="dropdown-item" href="#">Palas</a></Link></li>
+                    <li><Link id="RouterNavLink"  to={'/categorias/Martillos'}><div className="dropdown-item" href="#">Martillos</div></Link></li>
+                    <li><Link id="RouterNavLink"  to={'/categorias/Palas'}><div className="dropdown-item" href="#">Palas</div></Link></li>
                   </ul>
                 </li>
                 <li>
-                  <Link to={'/about'}>
-                    <a className="nav-link active" aria-current="page" href="#">Quienes somos</a>
+                  <Link id="RouterNavLink" to={'/about'}>
+                    <div className="nav-link active" aria-current="page" href="#">Quienes somos</div>
                   </Link>
                 </li>
               </ul>
-              <Link to={'/cart'}>
+              <Link id="RouterNavLink"  to={'/cart'}>
                 <ul className="d-flex">
                       <CartWidget /> 
                 </ul>

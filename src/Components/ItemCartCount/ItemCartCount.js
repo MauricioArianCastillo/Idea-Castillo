@@ -6,7 +6,7 @@ function ItemCartCount ({stock,initial,item,funcion,id}){
     const [count,setCount] = useState(item.cantidad);
 
     function agregar(){
-        if (count!=stock){
+        if (count<stock){
         setCount(count +1);
         funcion(count+1,id)
         }

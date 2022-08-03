@@ -25,7 +25,6 @@ function Cart(){
         setTotal(cart.map(item =>  item.price*item.cantidad).reduce((prev,curr) => prev + curr,0))
         
         if (count===0) setCart(cart.filter(item => item.id !== id))
-        console.log(cart)
 
     }
     function vaciarCarritoTotal(cart){
@@ -69,13 +68,20 @@ function Cart(){
                 <ul className="list-group">
                     {
                         cart.map(item => <li key={item.id} className="list-group-item">
-                            <div className="w-25">
-                            <img src={item.pictureUrl} className='w-25'/>
+                           
+                            <div className="position-relative">
+                                <div className="top-0 start-0 w-25"><img src={item.pictureUrl} className='w-25'/></div>
+                                <div className="position-absolute top-50 start-50 translate-middle"> Nombre: {item.title} <ItemCartCount stock={10} initial={0} item={item} id={item.id} funcion={funcion}/> Precio: ${item.price}</div>
+                                <div className="position-absolute top-50 end-0 translate-middle-y"><button type="button" className="btn btn-primary" onClick={() => funcion(0,item.id)}>Eliminar</button></div>
+                           
                             </div>
-                            Nombre: {item.title} <ItemCartCount stock={100} initial={0} item={item} id={item.id} funcion={funcion}/> Precio: ${item.price} </li>)
+                            
+                           
+                            </li>)
                     }
                 </ul>
             </div>
+            <br />
             <div>
                 <h3>TOTAL: ${total}</h3>
             </div>

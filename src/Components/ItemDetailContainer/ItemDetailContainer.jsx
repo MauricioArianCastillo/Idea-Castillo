@@ -22,7 +22,6 @@ const ItemDetailContainer = (props) => {
         onSnapshot(queryCollection,(snapshot) => {
             
             snapshot.docs.forEach((doc) => prod.push({ ...doc.data()}))
-            console.log(prod)
             setLoading(true)
             let prod_id = []
             prod.forEach((item) => {

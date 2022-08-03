@@ -11,13 +11,16 @@ function ItemDetail ({id,title,price,description,pictureUrl}){
     const [bool, setBool] = useState(true)
     const Add = (count) =>{
 
-        if(count!=0) {setBool(false)}
-        if(cart.find((item) => item.id===id)){
-            const item = cart.find((item) => item.id===id) 
-            item.cantidad = item.cantidad + count
-        
-        }  
-        else addToCart({...producto,cantidad: count})
+        if(count!=0) {
+            setBool(false)
+            if(cart.find((item) => item.id===id)){
+                const item = cart.find((item) => item.id===id) 
+                if (item.cantidad + count <11) item.cantidad = item.cantidad + count
+                else item.cantidad = 10
+            }  
+            else addToCart({...producto,cantidad: count})
+        }
+        else setBool('.')
         
     }
     
@@ -34,18 +37,28 @@ function ItemDetail ({id,title,price,description,pictureUrl}){
                             <h5 className="card-title">{title}</h5>
                             <p className="card-text">{description}</p>
                             ${price}
-                            { (bool) ?
-                            <ItemCount stock={10} initial={0} Add={Add} />
-                            : 
-                            
-
-                            <NavLink to={`/cart`}>
+                            {(() => {
+                                if (bool===true){ 
+                                return (<ItemCount stock={10} initial={0} Add={Add} />)}
+                                else if (bool===false){return (<NavLink to={`/cart`}>
                                 <br></br>
                                 <br></br>
                                 <button type="button" className="btn btn-primary" >Ir al carrito</button>
                                 
-                            </NavLink>
-                             }
+                            </NavLink>)
+                                }
+                                else{return(
+                                    <div><br></br><h3>Por favor, ingresar un numero</h3>
+                                    <br />
+                                    <ItemCount stock={10} initial={0} Add={Add} />
+                                    </div>) 
+                                } 
+                                
+                            }
+                            )()
+                                                    
+                            }
+                           
                         </div>
                     </div>
                 </div>

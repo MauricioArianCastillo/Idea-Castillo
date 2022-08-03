@@ -1,1 +1,0 @@
-El proyecto se basara en una tienda de herramientas. La idea seria que el usuario pueda ver todos los productos en el home del sitio y pueda seleccionar y comprar eligiendo la cantidad que desee. 
